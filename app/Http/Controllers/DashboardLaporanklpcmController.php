@@ -16,11 +16,13 @@ class DashboardLaporanklpcmController extends Controller
         return view('dashboard.laporanklpcm.index', [
             'dpjps' => Dpjp::query()
             ->withCount(['klpcms' => function(Builder $query){
-                $query = $this->applyDateFilter($query);
+                    $query = $this->applyDateFilter($query);
             }])
             ->withCount(['klpcm' => function(Builder $query){
                 $query = $this->applyDateFilter($query);
-                $query->where('rm3', '<>', 1)->Where('rm4', '<>', 1)->Where('rm8a', '<>', 1)->Where('rm8b', '<>', 1)->Where('rm9a', '<>', 1)->Where('rm9b', '<>', 1)->Where('rm9c', '<>', 1)->Where('rm9d', '<>', 1)->Where('rm9e', '<>', 1)->Where('rm9f', '<>', 1)->Where('rm9g', '<>', 1)->Where('rm9h', '<>', 1)->Where('rm9l', '<>', 1)->Where('rm15a', '<>', 1);
+                $query->where(function($query){
+                    $query->where('rm3', '<>', 1)->Where('rm4', '<>', 1)->Where('rm8a', '<>', 1)->Where('rm8b', '<>', 1)->Where('rm9a', '<>', 1)->Where('rm9b', '<>', 1)->Where('rm9c', '<>', 1)->Where('rm9d', '<>', 1)->Where('rm9e', '<>', 1)->Where('rm9f', '<>', 1)->Where('rm9g', '<>', 1)->Where('rm9h', '<>', 1)->Where('rm9l', '<>', 1)->Where('rm15a', '<>', 1);
+                });
             }
             ])
             ->withCount(['klpcmtidaklengkap' => function(Builder $query){
