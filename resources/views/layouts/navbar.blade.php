@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand bg-body-tertiary position-sticky sticky-top">
+<nav class="navbar navbar-expand-md bg-body-tertiary position-sticky sticky-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">RSKB HASTA HUSADA</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -16,7 +16,7 @@
             </li>
             @auth
             <li class="nav-item">
-              <a class="nav-link " href="/dashboards">Dashboard</a>
+              <a class="nav-link" href="/dashboards">Dashboard</a>
             </li>
             @endauth
           </ul>
