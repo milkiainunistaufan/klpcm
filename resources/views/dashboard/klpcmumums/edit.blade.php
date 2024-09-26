@@ -79,7 +79,7 @@
                         <label class="form-check-label" for="rm8a">Lengkap</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" {{ (old('rm8b', $klpcm->rm8b) == '1' ? "checked":"") }} type="radio" name="rm8a" id="rm8a" value="1">
+                        <input class="form-check-input" {{ (old('rm8a', $klpcm->rm8b) == '1' ? "checked":"") }} type="radio" name="rm8a" id="rm8a" value="1">
                         <label class="form-check-label" for="rm8a">Tidak</label>
                     </div>
                 </div>
