@@ -1,3 +1,6 @@
+@php
+use Carbon\Carbon;
+@endphp
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head><script src="../assets/js/color-modes.js"></script>
@@ -49,6 +52,37 @@
       </thead>
       <tbody>
       @foreach ($dpjps as $dpjp)
+        @php
+      // Get the start and end of the current month using Carbon
+          $currentMonthStart = Carbon::now()->startOfMonth();
+          $currentMonthEnd = Carbon::now()->endOfMonth();
+
+                if (request('date_start') && request('date_end')) {
+                    $filteredKlpcms = $dpjp->klpcms->filter(function ($klpcm) {
+                      return $klpcm->tgl_keluar >= request('date_start') && $klpcm->tgl_keluar <= request('date_end');
+                    });
+                } else {
+                  $filteredKlpcms = $dpjp->klpcms->filter(function ($klpcm) use ($currentMonthStart, $currentMonthEnd) {
+                      return $klpcm->tgl_keluar >= $currentMonthStart && $klpcm->tgl_keluar <= $currentMonthEnd;
+                  });
+                }
+                  
+              
+              $sumRm3 = $filteredKlpcms->sum('rm3');
+              $sumRm4 = $filteredKlpcms->sum('rm4');
+              $sumRm8a = $filteredKlpcms->sum('rm8a');
+              $sumRm8b = $filteredKlpcms->sum('rm8b');
+              $sumRm9a = $filteredKlpcms->sum('rm9a');
+              $sumRm9b = $filteredKlpcms->sum('rm9b');
+              $sumRm9c = $filteredKlpcms->sum('rm9c');
+              $sumRm9d = $filteredKlpcms->sum('rm9d');
+              $sumRm9e = $filteredKlpcms->sum('rm9e');
+              $sumRm9f = $filteredKlpcms->sum('rm9f');
+              $sumRm9g = $filteredKlpcms->sum('rm9g');
+              $sumRm9h = $filteredKlpcms->sum('rm9h');
+              $sumRm9l = $filteredKlpcms->sum('rm9l');
+              $sumRm15a = $filteredKlpcms->sum('rm15a');
+          @endphp
           <tr>
               <td>{{ $loop->iteration }}</td>
               <td>{{ $dpjp->dokter }}</td>
@@ -71,20 +105,20 @@
                   0
                 @endif
                 %</td>
-              <td>{{ $dpjp->klpcms->sum('rm3') }}</td>
-              <td>{{ $dpjp->klpcms->sum('rm4') }}</td>
-              <td>{{ $dpjp->klpcms->sum('rm8a') }}</td>
-              <td>{{ $dpjp->klpcms->sum('rm8b') }}</td>
-              <td>{{ $dpjp->klpcms->sum('rm9a') }}</td>
-              <td>{{ $dpjp->klpcms->sum('rm9b') }}</td>
-              <td>{{ $dpjp->klpcms->sum('rm9c') }}</td>
-              <td>{{ $dpjp->klpcms->sum('rm9d') }}</td>
-              <td>{{ $dpjp->klpcms->sum('rm9e') }}</td>
-              <td>{{ $dpjp->klpcms->sum('rm9f') }}</td>
-              <td>{{ $dpjp->klpcms->sum('rm9g') }}</td>
-              <td>{{ $dpjp->klpcms->sum('rm9h') }}</td>
-              <td>{{ $dpjp->klpcms->sum('rm9l') }}</td>
-              <td>{{ $dpjp->klpcms->sum('rm15a') }}</td>
+                <td>{{ $sumRm3 }}</td>
+                <td>{{ $sumRm4 }}</td>
+                <td>{{ $sumRm8a }}</td>
+                <td>{{ $sumRm8b }}</td>
+                <td>{{ $sumRm9a }}</td>
+                <td>{{ $sumRm9b }}</td>
+                <td>{{ $sumRm9c }}</td>
+                <td>{{ $sumRm9d }}</td>
+                <td>{{ $sumRm9e }}</td>
+                <td>{{ $sumRm9f }}</td>
+                <td>{{ $sumRm9g }}</td>
+                <td>{{ $sumRm9h }}</td>
+                <td>{{ $sumRm9l }}</td>
+                <td>{{ $sumRm15a }}</td>
           </tr>
       @endforeach
       </tbody>
